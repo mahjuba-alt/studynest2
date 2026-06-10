@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="StudyNest Pomodoro Timer — stay focused, beat distraction, and build deep work habits one session at a time." />
+    <title>Pomodoro Timer — StudyNest</title>
+    <link rel="stylesheet" href="pomodoro.css" />
+  </head>
+
+  <body>
+
+    <!-- ═══════════════════════════════════════════
+         HEADER / NAVBAR
+    ═══════════════════════════════════════════ -->
+    <header class="site-header" role="banner">
+      <div class="header-inner">
+
+        <a href="index.html" class="logo" aria-label="StudyNest home">
+          <span class="logo-icon" aria-hidden="true">🪺</span>
+          <span class="logo-text">StudyNest</span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="primaryNav"
+        >
+          <span class="hamburger-bar" aria-hidden="true"></span>
+          <span class="hamburger-bar" aria-hidden="true"></span>
+          <span class="hamburger-bar" aria-hidden="true"></span>
+        </button>
+
+        <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
+          <ul class="nav-list" role="list">
+            <li class="nav-item">
+              <a href="dashboard.html" class="nav-link">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a href="notes.html" class="nav-link">Notes</a>
+            </li>
+            <li class="nav-item">
+              <a href="quiz.html" class="nav-link">Quiz</a>
+            </li>
+            <li class="nav-item">
+              <a href="pomodoro.html" class="nav-link nav-link--active" aria-current="page">Pomodoro</a>
+            </li>
+          </ul>
+        </nav>
+
+        <a href="index.html" class="btn btn--outline btn--sm header-cta" aria-label="Go back to Dashboard">
+          ← Back to Dashboard
+        </a>
+
+      </div>
+    </header>
+
+
+    <!-- ═══════════════════════════════════════════
+         MAIN CONTENT
+    ═══════════════════════════════════════════ -->
+    <main id="mainContent" class="main-content">
+
+
+      <!-- ─────────────────────────────────────────
+           HERO SECTION
+      ───────────────────────────────────────── -->
+      <section class="hero-section" aria-labelledby="heroHeading">
+        <div class="hero-inner">
+          <h1 class="hero-heading" id="heroHeading">Pomodoro Timer</h1>
+          <p class="hero-description">
+            Deep work happens in focused bursts. Set your timer, silence the noise, and protect your concentration — one session at a time.
+          </p>
+        </div>
+      </section>
+
+
+      <!-- ─────────────────────────────────────────
+           TIMER SECTION
+      ───────────────────────────────────────── -->
+      <section class="timer-section" aria-labelledby="timerSectionHeading">
+        <h2 class="sr-only" id="timerSectionHeading">Timer</h2>
+
+        <div class="timer-container">
+
+          <!-- Circular Timer Display -->
+          <div class="timer-ring-wrapper" role="timer" aria-label="Pomodoro countdown timer" aria-live="polite">
+            <div class="timer-ring" id="timerRing" aria-hidden="true">
+              <svg class="timer-svg" viewBox="0 0 220 220" aria-hidden="true">
+                <circle
+                  class="timer-track"
+                  cx="110"
+                  cy="110"
+                  r="96"
+                  fill="none"
+                  stroke-width="10"
+                />
+                <circle
+                  class="timer-progress"
+                  id="timerProgressCircle"
+                  cx="110"
+                  cy="110"
+                  r="96"
+                  fill="none"
+                  stroke-width="10"
+                  stroke-linecap="round"
+                  transform="rotate(-90 110 110)"
+                />
+              </svg>
+
+              <div class="timer-face">
+                <output
+                  class="timer-display"
+                  id="timerDisplay"
+                  aria-label="Time remaining"
+                  aria-atomic="true"
+                >
+                  25:00
+                </output>
+                <span class="timer-label" id="timerModeLabel">Focus</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Adjustment Controls -->
+          <div class="time-adjust-group" role="group" aria-labelledby="timeAdjustLabel">
+            <span class="time-adjust-label" id="timeAdjustLabel">Set Duration</span>
+            <div class="time-adjust-controls">
+              <button
+                class="btn btn--icon"
+                id="decreaseTimeBtn"
+                aria-label="Decrease timer by 5 minutes"
+              >
+                −
+              </button>
+
+              <label for="timerInput" class="sr-only">Timer duration in minutes</label>
+              <input
+                type="number"
+                class="timer-input"
+                id="timerInput"
+                name="timerInput"
+                value="25"
+                min="1"
+                max="180"
+                step="5"
+                aria-describedby="timerInputHint"
+              />
+              <span class="timer-input-unit" aria-hidden="true">min</span>
+              <span class="sr-only" id="timerInputHint">Enter a value between 1 and 180 minutes</span>
+
+              <button
+                class="btn btn--icon"
+                id="increaseTimeBtn"
+                aria-label="Increase timer by 5 minutes"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <!-- Preset Buttons -->
+          <div class="preset-group" role="group" aria-label="Timer presets">
+            <button class="btn btn--preset btn--preset-active" id="preset25" data-minutes="25" aria-pressed="true">
+              <span class="preset-minutes">25</span>
+              <span class="preset-name">Pomodoro</span>
+            </button>
+            <button class="btn btn--preset" id="preset50" data-minutes="50" aria-pressed="false">
+              <span class="preset-minutes">50</span>
+              <span class="preset-name">Deep Work</span>
+            </button>
+            <button class="btn btn--preset" id="preset90" data-minutes="90" aria-pressed="false">
+              <span class="preset-minutes">90</span>
+              <span class="preset-name">Exam Mode</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ─────────────────────────────────────────
+           TIMER CONTROLS
+      ───────────────────────────────────────── -->
+      <section class="controls-section" aria-label="Timer controls">
+        <div class="controls-inner">
+
+          <button
+            class="btn btn--primary btn--control"
+            id="startBtn"
+            aria-label="Start timer"
+          >
+            ▶ Start
+          </button>
+
+          <button
+            class="btn btn--secondary btn--control"
+            id="pauseBtn"
+            aria-label="Pause timer"
+            disabled
+          >
+            ⏸ Pause
+          </button>
+
+          <button
+            class="btn btn--secondary btn--control"
+            id="resumeBtn"
+            aria-label="Resume timer"
+            hidden
+          >
+            ▶ Resume
+          </button>
+
+          <button
+            class="btn btn--ghost btn--control"
+            id="resetBtn"
+            aria-label="Reset timer to start"
+          >
+            ↺ Reset
+          </button>
+
+        </div>
+      </section>
+
+
+      <!-- ─────────────────────────────────────────
+           SESSION STATUS SECTION
+      ───────────────────────────────────────── -->
+      <section class="status-section" aria-labelledby="statusHeading" aria-live="polite" aria-atomic="false">
+        <h2 class="section-heading" id="statusHeading">Session Status</h2>
+
+        <article class="status-card" id="sessionStatusCard">
+          <dl class="status-list">
+
+            <div class="status-item">
+              <dt class="status-term">Status</dt>
+              <dd class="status-value status-value--badge" id="sessionStatus">
+                <span class="status-dot" aria-hidden="true"></span>
+                Idle
+              </dd>
+            </div>
+
+            <div class="status-item">
+              <dt class="status-term">Time Remaining</dt>
+              <dd class="status-value" id="sessionTimeRemaining">25:00</dd>
+            </div>
+
+            <div class="status-item">
+              <dt class="status-term">Session</dt>
+              <dd class="status-value" id="sessionLabel">Pomodoro #1</dd>
+            </div>
+
+          </dl>
+        </article>
+
+      </section>
+
+
+      <!-- ─────────────────────────────────────────
+           STATISTICS SECTION
+      ───────────────────────────────────────── -->
+      <section class="stats-section" aria-labelledby="statsHeading">
+        <h2 class="section-heading" id="statsHeading">Your Progress</h2>
+
+        <div class="stats-grid">
+
+          <article class="stat-card" aria-labelledby="statFocusLabel">
+            <div class="stat-icon" aria-hidden="true">⏱</div>
+            <div class="stat-body">
+              <span class="stat-value" id="statFocusTime">0 min</span>
+              <span class="stat-label" id="statFocusLabel">Today's Focus Time</span>
+            </div>
+          </article>
+
+          <article class="stat-card" aria-labelledby="statSessionsLabel">
+            <div class="stat-icon" aria-hidden="true">✅</div>
+            <div class="stat-body">
+              <span class="stat-value" id="statSessionsCompleted">0</span>
+              <span class="stat-label" id="statSessionsLabel">Completed Sessions</span>
+            </div>
+          </article>
+
+          <article class="stat-card" aria-labelledby="statStreakLabel">
+            <div class="stat-icon" aria-hidden="true">🔥</div>
+            <div class="stat-body">
+              <span class="stat-value" id="statCurrentStreak">0 days</span>
+              <span class="stat-label" id="statStreakLabel">Current Streak</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+
+      <!-- ─────────────────────────────────────────
+           MOTIVATIONAL QUOTE SECTION
+      ───────────────────────────────────────── -->
+      <section class="quote-section" aria-labelledby="quoteHeading">
+        <h2 class="sr-only" id="quoteHeading">Motivational Quote</h2>
+
+        <figure class="quote-card" id="quoteContainer" aria-live="polite" aria-atomic="true">
+          <blockquote class="quote-text" id="quoteText">
+            "The secret of getting ahead is getting started."
+          </blockquote>
+          <figcaption class="quote-author" id="quoteAuthor">— Mark Twain</figcaption>
+        </figure>
+
+        <button
+          class="btn btn--ghost btn--sm quote-refresh-btn"
+          id="refreshQuoteBtn"
+          aria-label="Load a new motivational quote"
+        >
+          New Quote
+        </button>
+
+      </section>
+
+
+    </main><!-- /main -->
+
+
+    <!-- ═══════════════════════════════════════════
+         SESSION COMPLETION MODAL
+    ═══════════════════════════════════════════ -->
+    <div
+      class="modal-overlay"
+      id="sessionModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalHeading"
+      aria-describedby="modalMessage"
+      hidden
+    >
+      <div class="modal-box" id="modalBox">
+
+        <div class="modal-icon" id="modalIcon" aria-hidden="true">🎉</div>
+
+        <h2 class="modal-heading" id="modalHeading">Session Completed!</h2>
+
+        <p class="modal-message" id="modalMessage">
+          You nailed it. Take a short break — you've earned it. Ready to go again?
+        </p>
+
+        <div class="modal-actions">
+          <button
+            class="btn btn--primary"
+            id="modalStartNextBtn"
+            aria-label="Start the next Pomodoro session"
+          >
+            Start Next Session
+          </button>
+          <button
+            class="btn btn--ghost"
+            id="modalCloseBtn"
+            aria-label="Close session completion dialog"
+          >
+            Take a Break
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════ -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+
+        <div class="footer-brand">
+          <span class="footer-logo-icon" aria-hidden="true">🪺</span>
+          <span class="footer-logo-text">StudyNest</span>
+        </div>
+
+        <p class="footer-tagline">Your space to think, focus, and grow.</p>
+
+        <p class="footer-copyright">
+          <small>© <span id="footerYear">2025</span> StudyNest. All rights reserved.</small>
+        </p>
+
+      </div>
+    </footer>
+
+    <script src="pomodoro.js"></script>
+  </body>
+</html>
