@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="StudyNest – your personal study companion for goals, tasks, and quick study tools." />
+  <title>StudyNest</title>
+
+  <!-- CSS link -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="StudyNest – your personal study companion for goals, tasks, and quick study tools." />
+    <title>StudyNest</title>
+  </head>
+  <body>
+
+    <!-- ========== HEADER ========== -->
+    <header>
+      <h1>📚 StudyNest</h1>
+      <p>Your personal study companion</p>
+    </header>
+
+    <!-- ========== MAIN DASHBOARD ========== -->
+    <main>
+      <h2>Dashboard</h2>
+
+      <section aria-labelledby="focus-heading">
+        <article>
+          <header>
+            <h3 id="focus-heading">🎯 Today's Focus</h3>
+            <p>Set a clear intention for today's study session.</p>
+          </header>
+
+          <label for="goal-input">Study goal</label>
+          <input
+            type="text"
+            id="goal-input"
+            name="goal"
+            placeholder="Write your goal..."
+            autocomplete="off"
+          />
+          <button type="button">Add Goal</button>
+        </article>
+      </section>
+
+      <section aria-labelledby="todo-heading">
+        <article>
+          <header>
+            <h3 id="todo-heading">✅ To-Do List</h3>
+            <p>Break your session into actionable tasks.</p>
+          </header>
+
+          <label for="task-input">New task</label>
+          <input
+            type="text"
+            id="task-input"
+            name="task"
+            placeholder="Add a task..."
+            autocomplete="off"
+          />
+          <button type="button">Add Task</button>
+
+          <ul id="task-list" aria-label="Task list" aria-live="polite">
+            <!-- Tasks will be added here -->
+          </ul>
+        </article>
+      </section>
+
+      <section aria-labelledby="tools-heading">
+        <article>
+          <header>
+            <h3 id="tools-heading">🛠 Quick Tools</h3>
+            <p>Jump straight into a study tool.</p>
+          </header>
+
+          <nav aria-label="Quick study tools">
+            <ul>
+              <li>
+                <button type="button">📖 Notes</button>
+              </li>
+              <li>
+                <button type="button">⏱ Pomodoro Timer</button>
+              </li>
+              <li>
+                <button type="button">🧠 Quiz</button>
+              </li>
+            </ul>
+          </nav>
+        </article>
+      </section>
+    </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+  <p>Stay consistent, stay ahead.</p>
+  </footer>
+
+  <!-- JS LINK HERE -->
+  <script src="script.js" defer></script>
+
+  </body>
+  </html>
